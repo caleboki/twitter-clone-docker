@@ -14,10 +14,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script>
+        window.User = {
+            id: {{ optional(auth()->user())->id }},
+            avatar: '{{ optional(auth()->user())->avatar() }}'
+        }
+    </script>
 </head>
 <body>
     <div id="app">
-
         <main class="container mx-auto">
             @yield('content')
         </main>
