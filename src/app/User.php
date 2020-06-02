@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Tweets;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,6 +42,11 @@ class User extends Authenticatable
     public function avatar()
     {
         return 'https://www.gravatar.com/avatar/' . md5($this->email) . '?d=mp';
+    }
+
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
     }
 
     public function following()
