@@ -1,6 +1,6 @@
 version: "3"
-        
-services:  
+
+services:
     # nginx
     nginx:
         container_name: ${PROJECT_NAME}_nginx
@@ -13,7 +13,7 @@ services:
         ports:
             - 8080:8080
         working_dir: /src
-       
+
     # php
     php-fpm:
         container_name: ${PROJECT_NAME}_php-fpm
@@ -22,15 +22,17 @@ services:
             - mysql
             - redis
             - mailhog
+        ports:
+            - 6001:6001
         volumes:
             - ./src:/src
         working_dir: /src
-        
+
     # database
     mysql:
         container_name: ${PROJECT_NAME}_mysql
         image: mysql
-        volumes: 
+        volumes:
             - ./database:/var/lib/mysql
         ports:
             - 3306:3306
@@ -41,8 +43,8 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            
-    # adminer      
+
+    # adminer
     adminer:
         container_name: ${PROJECT_NAME}_adminer
         image: adminer
@@ -59,8 +61,8 @@ services:
     redis:
         container_name: ${PROJECT_NAME}_redis
         image: redis:alpine
-     
-    # redis commander 
+
+    # redis commander
     redis-commander:
         container_name: ${PROJECT_NAME}_redis_commander
         hostname: redis-commander
@@ -74,11 +76,10 @@ services:
         ports:
             - 6081:8081
 
-    # mailhog       
+    # mailhog
     mailhog:
         container_name: ${PROJECT_NAME}_mailhog
         image: mailhog/mailhog
-        ports: 
+        ports:
             - 1025:1025
             - 6082:8025
-    
