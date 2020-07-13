@@ -38,8 +38,10 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'local',
     namespace: null,
-    //encrypted: true,
-    enableStats: true,
+    encrypted: false,
+    disableStats: true,
+    enabledTransports: ['ws'],
     wsHost: window.location.hostname,
-    wsPort: 6001
+    wsPort: 6001,
+    wssPort: 6001
 });
