@@ -2,6 +2,7 @@
 
 namespace App\Events\Tweets;
 
+use App\Http\Resources\TweetResource;
 use App\Tweet;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -26,6 +27,11 @@ class TweetWasCreated implements ShouldBroadcast
     public function __construct(Tweet $tweet)
     {
         $this->tweet = $tweet;
+    }
+
+    public function broadcastWith()
+    {
+        return (new TweetResource($this->tweet))->jsonSerialize();
     }
 
     public function broadcastAs()
