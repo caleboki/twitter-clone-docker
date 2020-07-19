@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\UserResource;
-use App\Http\Resources\TweetResource;
+//use App\Http\Resources\UserResource;
+//use App\Http\Resources\TweetResource;
 
 use App\Tweet;
 use Illuminate\Http\Resources\Json\JsonResource;
