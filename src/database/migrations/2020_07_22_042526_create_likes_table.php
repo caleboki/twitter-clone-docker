@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTweetsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTweetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tweets', function (Blueprint $table) {
-            $table->id()->unsigned();
+        Schema::create('likes', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->unsigned()->index();
-            $table->text('body')->nullable();
+            $table->foreignId('tweet_id')->unsigned()->index();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('tweet_id')->references('id')->on('tweets')->onDelete('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateTweetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tweets');
+        Schema::dropIfExists('likes');
     }
 }
