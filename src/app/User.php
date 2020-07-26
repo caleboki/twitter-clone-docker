@@ -69,4 +69,9 @@ class User extends Authenticatable
             Tweet::class, Follower::class, 'user_id', 'user_id', 'id', 'following_id'
         );
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

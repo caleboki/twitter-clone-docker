@@ -8,7 +8,9 @@
                 :user="tweet.user"
             />
             <p class="text-gray-300 whitespace-pre-wrap">{{ tweet.body }}</p>
-            <app-tweet-action-group />
+            <app-tweet-action-group
+                :tweet="tweet"
+            />
         </div>
     </div>
 </template>
