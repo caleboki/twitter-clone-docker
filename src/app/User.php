@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
+    public function hasLiked(Tweet $tweet)
+    {
+        return $this->likes->contains('tweet_id', $tweet->id);
+    }
+
     public function following()
     {
         return $this->belongsToMany(
