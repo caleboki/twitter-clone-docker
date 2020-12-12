@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Tweets;
+use App\Tweets\TweetType;
 
 class User extends Authenticatable
 {
@@ -78,5 +79,12 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function retweets()
+    {
+        return $this->hasMany(Tweet::class)
+            ->where('type', TweetType::RETWEET)
+            ->orWhere('type', TweetType::QUOTE);
     }
 }
