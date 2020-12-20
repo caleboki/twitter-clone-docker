@@ -20,5 +20,14 @@ export default {
         }
     },
 
+    actions: {
+        async retweetTweet (_, tweet) {
+            await axios.post(`/api/tweets/${tweet.id}/retweets`)
+        },
+        async unRetweetTweet (_, tweet) {
+            await axios.delete(`/api/tweets/${tweet.id}/retweets`)
+        }
+    },
+
 
 }
