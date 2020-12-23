@@ -55,4 +55,11 @@ window.Echo.channel('tweets')
             store.dispatch('syncLike', e.id)
         }
         store.commit('timeline/SET_LIKES', e)
+    })
+    .listen('.TweetRetweetsWereUpdated', (e) => {
+        if (e.user_id === User.id) {
+            store.dispatch('syncRetweet', e.id)
+        }
+        store.commit('timeline/SET_RETWEETS', e)
+        //store.commit('notifications/SET_RETWEETS', e)
     });

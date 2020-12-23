@@ -36,6 +36,22 @@ export default {
 
                 return t
             })
+        },
+
+        SET_RETWEETS (state, { id, count}) {
+            state.tweets = state.tweets.map((t) => {
+                // Normal tweet case
+                if (t.id === id) {
+                    t.retweets_count = count
+                }
+
+                // Retweet of a quote case
+                if (get(t, 'original_tweet.id') === id) {
+                    t.original_tweet.retweets_count = count
+                }
+
+                return t
+            })
         }
     },
 
