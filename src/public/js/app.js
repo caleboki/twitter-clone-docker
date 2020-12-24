@@ -63629,6 +63629,8 @@ window.Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
   }
 
   store.commit('timeline/SET_RETWEETS', e); //store.commit('notifications/SET_RETWEETS', e)
+}).listen('.TweetWasDeleted', function (e) {
+  store.commit('timeline/POP_TWEET', e.id);
 });
 
 /***/ }),
@@ -64982,6 +64984,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return t.id;
         }).includes(tweet.id);
       })));
+    },
+    POP_TWEET: function POP_TWEET(state, id) {
+      state.tweets = state.tweets.filter(function (t) {
+        return t.id !== id;
+      });
     },
     SET_LIKES: function SET_LIKES(state, _ref) {
       var id = _ref.id,

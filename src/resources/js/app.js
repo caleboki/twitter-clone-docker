@@ -62,4 +62,7 @@ window.Echo.channel('tweets')
         }
         store.commit('timeline/SET_RETWEETS', e)
         //store.commit('notifications/SET_RETWEETS', e)
+    })
+    .listen('.TweetWasDeleted', (e) => {
+        store.commit('timeline/POP_TWEET', e.id)
     });
