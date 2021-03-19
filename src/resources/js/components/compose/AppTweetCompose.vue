@@ -6,7 +6,10 @@
                 v-model="form.body"
             />
             <div class="flex justify-between">
-                <div></div>
+                <app-tweet-compose-media-button
+                    :id="media-compose"
+                    @selected="handleMediaSelected"
+                />
                 <div class="flex items-center justify-end">
                     <div>
                         <app-tweet-compose-limit
@@ -33,7 +36,13 @@ export default {
     data() {
         return {
             form: {
-                body: ''
+                body: '',
+                media: []
+            },
+
+            media: {
+                images: [],
+                video: null
             }
         }
     },
@@ -41,6 +50,10 @@ export default {
         async submit () {
             await axios.post('/api/tweets', this.form)
             this.form.body = ''
+        },
+
+        handleMediaSelected(files) {
+            console.log(files)
         }
     },
 }
