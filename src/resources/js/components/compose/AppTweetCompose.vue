@@ -5,6 +5,7 @@
             <app-tweet-compose-textarea
                 v-model="form.body"
             />
+            <span class="text-gray-600">{{ media }}</span>
             <div class="flex justify-between">
                 <app-tweet-compose-media-button
                     :id="media-compose"
@@ -17,6 +18,7 @@
                             :body="form.body"
                         />
                     </div>
+
                     <button
                         type="submit" class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none">
                     Tweet
@@ -43,7 +45,9 @@ export default {
             media: {
                 images: [],
                 video: null
-            }
+            },
+
+            mediaTypes: {}
         }
     },
     methods: {
@@ -52,9 +56,34 @@ export default {
             this.form.body = ''
         },
 
+        async getMediaTypes () {
+            let response = await axios.get('/api/media/types')
+            this.mediaTypes = response.data.data
+        },
+
         handleMediaSelected(files) {
-            console.log(files)
+            Array.from(files).slice(0, 4).forEach((file) => {
+                //check if file is an image
+                if (this.mediaTypes.image.includes(file.type)) {
+                    this.media.images.push(file)
+                }
+
+                //check if file is a video
+                if (this.mediaTypes.video.includes(file.type)) {
+                    this.media.video = file
+                }
+            })
+
+            if (this.media.video) {
+                this.media.images = []
+            }
+
         }
+    },
+
+    mounted() {
+        this.getMediaTypes()
+
     },
 }
 </script>

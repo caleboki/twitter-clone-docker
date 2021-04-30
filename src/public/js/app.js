@@ -2007,6 +2007,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2022,7 +2024,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       media: {
         images: [],
         video: null
-      }
+      },
+      mediaTypes: {}
     };
   },
   methods: {
@@ -2048,9 +2051,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    getMediaTypes: function getMediaTypes() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/media/types');
+
+              case 2:
+                response = _context2.sent;
+                _this2.mediaTypes = response.data.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     handleMediaSelected: function handleMediaSelected(files) {
-      console.log(files);
+      var _this3 = this;
+
+      Array.from(files).slice(0, 4).forEach(function (file) {
+        //check if file is an image
+        if (_this3.mediaTypes.image.includes(file.type)) {
+          _this3.media.images.push(file);
+        } //check if file is a video
+
+
+        if (_this3.mediaTypes.video.includes(file.type)) {
+          _this3.media.video = file;
+        }
+      });
+
+      if (this.media.video) {
+        this.media.images = [];
+      }
     }
+  },
+  mounted: function mounted() {
+    this.getMediaTypes();
   }
 });
 
@@ -49413,6 +49459,10 @@ var render = function() {
             }
           }),
           _vm._v(" "),
+          _c("span", { staticClass: "text-gray-600" }, [
+            _vm._v(_vm._s(_vm.media))
+          ]),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "flex justify-between" },
@@ -65777,8 +65827,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /src/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /src/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/caleboki/Documents/twitter-clone-docker/src/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/caleboki/Documents/twitter-clone-docker/src/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
